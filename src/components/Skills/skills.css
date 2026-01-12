@@ -2,7 +2,8 @@
     overflow: hidden;
     width: 100vw;
     max-width: 100rem;
-    padding-left: 6vw;
+    padding-left: 8vw;
+    padding-right: 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +17,7 @@
     font-size: 3rem;
     font-weight: 600;
     padding-top: 0rem;
-    padding-left: 6vw;
+    padding-left: 0vw;
     margin-bottom: 1.5rem;
 }
 .skillDesc {
@@ -28,7 +29,7 @@
 
 .skillBars {
     margin: 1.5rem auto;  /* auto left/right margins center the container */
-    width: 80%;           /* use a percentage width */
+    width: 75%;           /* use a percentage width */
     text-align: center;   /* center text inside */
     display: flex;
     flex-direction: column;
@@ -53,15 +54,65 @@
 .skillBarText {
     font-size: 0.95rem;
     font-weight: 200;
-    margin-left: 2rem;
+    margin-left: 0rem;
+}
+
+.skillBarTextTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-right: 8rem;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.0vw;
+  width: 80%;          /* optional */
+  margin: 0 auto;
+  justify-content: center; /* this centers the grid items inside */
+}
+
+.skillCard {
+  height: 6vw;
+  border-radius: 2vw;
+  aspect-ratio: 1.0 / 1.0; /* keeps shape without breaking mobile */
+  padding: 0.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skillCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
+}
+
+.skillIcon {
+  width: 3.5vw;
+  height: auto;
+  margin-bottom: 0.8vw;
+}
+
+.skillCardText {
+  font-weight: 600;
+  font-size: 1.0vw;
+  color: #ffffff;
 }
 
 @media screen and (max-width:720px) {
     .skillBarText {
         font-size: 2vw;
     }
+    .skillBarTextTitle {
+        padding-right: 0rem;
+    }
     #skills {
         padding-left: 0vw;
+        font-size: 3vw;
     }
 }
 
