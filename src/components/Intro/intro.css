@@ -44,19 +44,26 @@
 }
 
 .btn {
+    display: inline-flex;
+    align-items: center; /* vertically centers content */
+    justify-content: center; /* optional, centers horizontally */
     background: white;
-    margin: 1rem 0;
+    margin: 2rem 0;
     padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 2rem;
+    border-radius: 4rem;
     cursor: pointer;
+    font-weight: 600;
 }
+
 
 .btnImg {
     object-fit: cover;
-    margin: 0 0.25rem;
+    margin: 0 0.4rem;
     height: 1rem;
+    vertical-align: middle; /* add this */
 }
+
 
 @media screen and (max-width:840px) {
     .bg {

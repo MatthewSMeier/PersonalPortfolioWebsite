@@ -1,9 +1,9 @@
-#skills {
+#skills { 
     overflow: hidden;
-    width: 100vw;
+    width: 100%;
     max-width: 100rem;
-    padding-left: 8vw;
-    padding-right: 6vw;
+    margin: 0 auto;         /* centers the whole section */
+    padding: 2rem;          /* uniform padding */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,24 +16,19 @@
 .skillTitle {
     font-size: 3rem;
     font-weight: 600;
-    padding-top: 0rem;
-    padding-left: 0vw;
     margin-bottom: 1.5rem;
 }
 .skillDesc {
-    font-weight: 400;
-    font-size: 1rem;
+    font-weight: 300;
+    font-size: 1.05rem;
     max-width: 55rem;
     padding: 0 2rem;
 }
 
 .skillBars {
-    margin: 1.5rem auto;  /* auto left/right margins center the container */
+    margin: 1.5rem 0;  /* auto left/right margins center the container */
     width: 75%;           /* use a percentage width */
     text-align: center;   /* center text inside */
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* center child elements horizontally */
 }
 
 .skillBar {
@@ -51,16 +46,22 @@
     width: 3rem;
 }
 
+
 .skillBarText {
     font-size: 0.95rem;
     font-weight: 200;
-    margin-left: 0rem;
+}
+
+.skillBarTextDesc {
+    font-size: 1.08rem;
+    font-weight: 300;
+    padding: 0.6vw 0vw;
 }
 
 .skillBarTextTitle {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    padding-right: 8rem;
+    padding-right: 0rem;
 }
 
 .skillsGrid {
@@ -81,6 +82,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
