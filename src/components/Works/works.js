@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // <-- import this
+import { useNavigate } from 'react-router-dom'; 
 import './works.css';
 import GitHub from '../../assets/github2.png';
 import Portfolio1 from '../../assets/portfolio-1.png';
@@ -12,7 +12,6 @@ import Portfolio6 from '../../assets/portfolio-6.png';
 const Works = () => {
   const navigate = useNavigate();
 
-  // 👈 Define handleClick inside the component
   const handleClick = (project) => {
     if (project === 'subrequestfinder') {
       navigate('/subrequestfinder');

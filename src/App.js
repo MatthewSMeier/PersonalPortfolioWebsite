@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/NavBar/navbar";
 import Intro from "./components/Intro/intro";
 import Skills from "./components/Skills/skills";
@@ -7,11 +7,15 @@ import Contact from "./components/Contact/contact";
 import Footer from "./components/Footer/footer";
 import SubRequestFinder from "./components/SubRequestFinder/subrequestfinder";
 
+function AppContent() {
+  const location = useLocation();
 
-function App() {
+  // Hide navbar only on subrequestfinder page
+  const hideNavbar = location.pathname === "/subrequestfinder";
+
   return (
-    <BrowserRouter>   {/* 👈 Must wrap everything */}
-      <Navbar />
+    <>
+      {!hideNavbar && <Navbar />}
 
       <Routes>
         <Route
@@ -30,6 +34,14 @@ function App() {
       </Routes>
 
       <Footer />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

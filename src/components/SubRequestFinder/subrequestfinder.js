@@ -1,12 +1,19 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom"; // <-- added for Home button
 import Chart from "chart.js/auto";
+import "./subrequestfinder.css"; 
+import SubRequestNavbar from "./SubRequestNavbar";
 
 export default function SubRequestFinder() {
   const pieCanvasRef = useRef(null);
   const barCanvasRef = useRef(null);
+  const dayBarCanvasRef = useRef(null);
 
   const pieChartRef = useRef(null);
   const barChartRef = useRef(null);
+  const dayBarChartRef = useRef(null);
+
+  const isMobile = window.innerWidth < 768;
 
   // -----------------------------
   // DEFAULT DATA
@@ -46,6 +53,7 @@ export default function SubRequestFinder() {
   // PIE CHART
   // -----------------------------
   const renderPieChart = (data) => {
+    if (!pieCanvasRef.current) return;
     if (pieChartRef.current) pieChartRef.current.destroy();
 
     pieChartRef.current = new Chart(pieCanvasRef.current, {
@@ -62,11 +70,11 @@ export default function SubRequestFinder() {
               "#9b59b6",
               "#e74c3c",
               "#f1c40f",
-              "#00c8ff",
-              "#ff7a00",
-              "#2ecc71",
-              "#9b59b6",
-              "#e74c3c",
+              "#1abc9c",
+              "#3498db",
+              "#e67e22",
+              "#95a5a6",
+              "#c0392b",
             ],
           },
         ],
@@ -79,11 +87,15 @@ export default function SubRequestFinder() {
             display: true,
             text: "Sub Requests by Class",
             color: "#ffffff",
-            font: { size: 18 },
+            font: { size: isMobile ? 14 : 18 },
           },
           legend: {
-            labels: { color: "#ffffff" },
-            position: "right",
+            position: isMobile ? "bottom" : "right",
+            labels: {
+              color: "#ffffff",
+              boxWidth: isMobile ? 12 : 18,
+              font: { size: isMobile ? 10 : 12 },
+            },
           },
         },
       },
@@ -94,6 +106,7 @@ export default function SubRequestFinder() {
   // BAR CHART
   // -----------------------------
   const renderBarChart = (data) => {
+    if (!barCanvasRef.current) return;
     if (barChartRef.current) barChartRef.current.destroy();
 
     barChartRef.current = new Chart(barCanvasRef.current, {
@@ -118,20 +131,68 @@ export default function SubRequestFinder() {
             display: true,
             text: "Sub Requests by Day & Time Slot",
             color: "#ffffff",
-            font: { size: 18 },
+            font: { size: isMobile ? 14 : 18 },
           },
-          legend: { labels: { color: "#ffffff" } },
+          legend: { display: false },
         },
         scales: {
           x: {
-            ticks: { color: "#ffffff", maxRotation: 45, minRotation: 45 },
+            ticks: {
+              color: "#ffffff",
+              maxRotation: isMobile ? 90 : 45,
+              minRotation: isMobile ? 90 : 45,
+              font: { size: isMobile ? 9 : 11 },
+            },
             grid: { color: "rgba(255,255,255,0.1)" },
           },
           y: {
             beginAtZero: true,
-            ticks: { color: "#ffffff" },
+            ticks: {
+              color: "#ffffff",
+              font: { size: isMobile ? 10 : 12 },
+            },
             grid: { color: "rgba(255,255,255,0.1)" },
           },
+        },
+      },
+    });
+  };
+
+  // -----------------------------
+  // DAY BAR CHART
+  // -----------------------------
+  const renderDayBarChart = (data) => {
+    if (!dayBarCanvasRef.current) return;
+    if (dayBarChartRef.current) dayBarChartRef.current.destroy();
+
+    dayBarChartRef.current = new Chart(dayBarCanvasRef.current, {
+      type: "bar",
+      data: {
+        labels: Object.keys(data),
+        datasets: [
+          {
+            label: "Sub Requests",
+            data: Object.values(data),
+            backgroundColor: "rgba(255,122,0,0.7)",
+            borderColor: "rgba(255,122,0,1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "Sub Requests by Day",
+            color: "#ffffff",
+          },
+          legend: { display: false },
+        },
+        scales: {
+          x: { ticks: { color: "#ffffff" }},
+          y: { beginAtZero: true, ticks: { color: "#ffffff" }},
         },
       },
     });
@@ -141,15 +202,15 @@ export default function SubRequestFinder() {
   // LOAD DATA
   // -----------------------------
   useEffect(() => {
-    // Defaults first (instant render)
     renderPieChart(defaultPieData);
     renderBarChart(defaultBarData);
 
     async function loadData() {
       try {
-        const [pieRes, barRes] = await Promise.all([
+        const [pieRes, barRes, dayRes] = await Promise.all([
           fetch("http://localhost:8000/api/class_breakdown"),
           fetch("http://localhost:8000/api/sub_requests"),
+          fetch("http://localhost:8000/api/sub_requests_by_day"),
         ]);
 
         if (pieRes.ok) {
@@ -160,6 +221,11 @@ export default function SubRequestFinder() {
         if (barRes.ok) {
           const barData = await barRes.json();
           if (Object.keys(barData).length) renderBarChart(barData);
+        }
+
+        if (dayRes.ok) {
+          const dayData = await dayRes.json();
+          if (Object.keys(dayData).length) renderDayBarChart(dayData);
         }
       } catch (err) {
         console.error("Failed to load charts:", err);
@@ -173,18 +239,31 @@ export default function SubRequestFinder() {
   // UI
   // -----------------------------
   return (
-    <div style={{ padding: "2rem", color: "#ffffff" }}>
+    <section className="subpage">
+        <SubRequestNavbar />
+
       <h1>Sub Request Finder</h1>
       <p>
         This dashboard visualizes substitute requests by class and time,
         helping instructors identify high-demand periods at a glance.
       </p>
 
+      {/* CENTERED GREY BOX */}
+      <div className="info-box">
+        <h2>Project Overview</h2>
+        <p>
+          This project parses real AoPS substitute request emails using a
+          FastAPI backend with Gmail IMAP, caches results for performance,
+          and visualizes trends using Chart.js.
+        </p>
+      </div>
+
       {/* PIE CHART */}
       <div
         style={{
-          height: "300px",
-          width: "60vw",
+          height: isMobile ? "320px" : "360px",
+          maxWidth: "900px",
+          width: "100%",
           margin: "0 auto 3rem",
           backgroundColor: "#111",
           padding: "1rem",
@@ -194,11 +273,20 @@ export default function SubRequestFinder() {
         <canvas ref={pieCanvasRef} />
       </div>
 
+      {/* CENTERED GREY BOX */}
+      <div className="info-box">
+        <h2>Project Overview</h2>
+        <p>
+          This dashboard visualizes substitute requests in the mathematics department by math level, day, and time slot. This helping instructors identify high-demand periods at a glance. Data is automatically updated from email requests.
+        </p>
+      </div>
+
       {/* BAR CHART */}
       <div
         style={{
-          height: "350px",
-          width: "70vw",
+          height: isMobile ? "420px" : "450px",
+          maxWidth: "1000px",
+          width: "100%",
           margin: "0 auto",
           backgroundColor: "#111",
           padding: "1rem",
@@ -207,6 +295,30 @@ export default function SubRequestFinder() {
       >
         <canvas ref={barCanvasRef} />
       </div>
-    </div>
+
+      {/* CENTERED GREY BOX */}
+      <div className="info-box">
+        <h2>Project Overview</h2>
+        <p>
+          This dashboard visualizes substitute requests in the mathematics department by math level, day, and time slot. This helping instructors identify high-demand periods at a glance. Data is automatically updated from email requests.
+        </p>
+      </div>
+
+      {/* DAY BAR CHART */}
+      <div
+        style={{
+          height: isMobile ? "420px" : "450px",
+          maxWidth: "1000px",
+          width: "100%",
+          margin: "2rem auto",
+          backgroundColor: "#111",
+          padding: "1rem",
+          borderRadius: "10px",
+        }}
+      >
+        <canvas ref={dayBarCanvasRef} />
+      </div>
+
+    </section>
   );
 }

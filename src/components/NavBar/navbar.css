@@ -21,7 +21,23 @@
 .desktopMenuListItem {
     margin: 1rem;
     cursor: pointer;
+    color: white;      
+    text-decoration: none; 
 }
+
+.desktopMenuListItemSRF {
+    margin: 1rem;
+    cursor: pointer;
+    color: lightskyblue;      
+    text-decoration: none; 
+}
+
+.desktopMenuListItemSRF:hover {
+    color: lightskyblue;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid lightskyblue;
+}
+
 
 .desktopMenuBtn  {
     background: white;
