@@ -64,6 +64,8 @@
     padding-right: 0rem;
 }
 
+
+
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -105,28 +107,73 @@
   color: #ffffff;
 }
 
-@media screen and (max-width:720px) {
-    .skillBarText {
-        font-size: 2vw;
-    }
-    .skillBarTextTitle {
-        padding-right: 0rem;
-    }
-    #skills {
-        padding-left: 0vw;
-        font-size: 3vw;
-    }
+@media screen and (max-width:1200px) {
+    .skillCard {
+    height: 12vw;
+    border-radius: 4vw;
+    padding: 1.5vw;
+  }
+
+  .skillIcon {
+    width: 8vw;
+    margin-bottom: 1.5vw;
+  }
+
+  .skillCardText {
+    font-size: 10vw;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width:800px) {
+     .skillCard {
+    height: 18vw;
+    border-radius: 4vw;
+    padding: 1.5vw;
+  }
+
+  .skillIcon {
+    width: 8vw;
+    margin-bottom: 1.5vw;
+  }
+
+  .skillCardText {
+    font-size: 10vw;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    justify-items: center;
+  }
 }
 
 @media screen and (max-width:480px) {
-    .skillBarText {
-        font-size: 2vw;
-    }
-    .skillBarImg {
-        height: 2.25rem;
-        width: 2.25rem;
-    }
-    .skillBarText>h2 {
-        font-size: 5vw;
-    }
+
+  .skillCard {
+    height: 18vw;
+    border-radius: 4vw;
+    padding: 1.5vw;
+  }
+
+  .skillIcon {
+    width: 8vw;
+    margin-bottom: 1.5vw;
+  }
+
+  .skillCardText {
+    font-size: 10vw;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    justify-items: center;
+  }
+
 }

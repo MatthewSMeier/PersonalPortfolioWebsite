@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom"; // <-- added for Home button
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Chart from "chart.js/auto";
 import "./subrequestfinder.css"; 
 import SubRequestNavbar from "./SubRequestNavbar";
@@ -14,6 +14,13 @@ export default function SubRequestFinder() {
   const dayBarChartRef = useRef(null);
 
   const isMobile = window.innerWidth < 768;
+
+  // -----------------------------
+  // Animation state
+  // -----------------------------
+  const [pieVisible, setPieVisible] = useState(false);
+  const [barVisible, setBarVisible] = useState(false);
+  const [dayBarVisible, setDayBarVisible] = useState(false);
 
   // -----------------------------
   // DEFAULT DATA
@@ -47,6 +54,16 @@ export default function SubRequestFinder() {
     "Wednesday 1:45 - 3:30": 1,
     "Wednesday 4:00 - 5:45": 2,
     "Wednesday 6:15 - 8:00": 5,
+  };
+
+  const defaultDayBarData = {
+    Monday: 6,
+    Tuesday: 4,
+    Wednesday: 8,
+    Thursday: 4,
+    Friday: 0,
+    Saturday: 20,
+    Sunday: 18,
   };
 
   // -----------------------------
@@ -85,7 +102,7 @@ export default function SubRequestFinder() {
         plugins: {
           title: {
             display: true,
-            text: "Sub Requests by Class",
+            text: "Demand by Class",
             color: "#ffffff",
             font: { size: isMobile ? 14 : 18 },
           },
@@ -103,7 +120,7 @@ export default function SubRequestFinder() {
   };
 
   // -----------------------------
-  // BAR CHART
+  // TIME SLOT BAR CHART
   // -----------------------------
   const renderBarChart = (data) => {
     if (!barCanvasRef.current) return;
@@ -117,8 +134,8 @@ export default function SubRequestFinder() {
           {
             label: "Sub Requests",
             data: Object.values(data),
-            backgroundColor: "rgba(0, 200, 255, 0.7)",
-            borderColor: "rgba(0, 200, 255, 1)",
+            backgroundColor: "rgba(0,200,255,0.7)",
+            borderColor: "rgba(0,200,255,0.7)",
             borderWidth: 1,
           },
         ],
@@ -129,7 +146,7 @@ export default function SubRequestFinder() {
         plugins: {
           title: {
             display: true,
-            text: "Sub Requests by Day & Time Slot",
+            text: "Demand by Time Slot",
             color: "#ffffff",
             font: { size: isMobile ? 14 : 18 },
           },
@@ -143,7 +160,7 @@ export default function SubRequestFinder() {
               minRotation: isMobile ? 90 : 45,
               font: { size: isMobile ? 9 : 11 },
             },
-            grid: { color: "rgba(255,255,255,0.1)" },
+            grid: { color: "rgba(255,255,255,0.2)" },
           },
           y: {
             beginAtZero: true,
@@ -151,7 +168,7 @@ export default function SubRequestFinder() {
               color: "#ffffff",
               font: { size: isMobile ? 10 : 12 },
             },
-            grid: { color: "rgba(255,255,255,0.1)" },
+            grid: { color: "rgba(255,255,255,0.2)" },
           },
         },
       },
@@ -173,8 +190,8 @@ export default function SubRequestFinder() {
           {
             label: "Sub Requests",
             data: Object.values(data),
-            backgroundColor: "rgba(255,122,0,0.7)",
-            borderColor: "rgba(255,122,0,1)",
+            backgroundColor: "rgba(0,255,170,0.7)",
+            borderColor: "rgba(0,255,170,0.7)",
             borderWidth: 1,
           },
         ],
@@ -185,14 +202,27 @@ export default function SubRequestFinder() {
         plugins: {
           title: {
             display: true,
-            text: "Sub Requests by Day",
+            text: "Demand by Day",
             color: "#ffffff",
+            font: { size: isMobile ? 14 : 18 },
           },
           legend: { display: false },
         },
         scales: {
-          x: { ticks: { color: "#ffffff" }},
-          y: { beginAtZero: true, ticks: { color: "#ffffff" }},
+          x: {
+            ticks: {
+              color: "#ffffff",
+              maxRotation: isMobile ? 90 : 45,
+              minRotation: isMobile ? 90 : 45,
+              font: { size: isMobile ? 9 : 11 },
+            },
+            grid: { color: "rgba(200,200,200,0.2)" },
+          },
+          y: {
+            beginAtZero: true,
+            ticks: { color: "#ffffff", font: { size: isMobile ? 10 : 12 } },
+            grid: { color: "rgba(200,200,200,0.2)" },
+          },
         },
       },
     });
@@ -203,7 +233,13 @@ export default function SubRequestFinder() {
   // -----------------------------
   useEffect(() => {
     renderPieChart(defaultPieData);
+    setPieVisible(true);
+
     renderBarChart(defaultBarData);
+    setBarVisible(true);
+
+    renderDayBarChart(defaultDayBarData);
+    setDayBarVisible(true);
 
     async function loadData() {
       try {
@@ -215,17 +251,26 @@ export default function SubRequestFinder() {
 
         if (pieRes.ok) {
           const pieData = await pieRes.json();
-          if (Object.keys(pieData).length) renderPieChart(pieData);
+          if (Object.keys(pieData).length) {
+            renderPieChart(pieData);
+            setPieVisible(true);
+          }
         }
 
         if (barRes.ok) {
           const barData = await barRes.json();
-          if (Object.keys(barData).length) renderBarChart(barData);
+          if (Object.keys(barData).length) {
+            renderBarChart(barData);
+            setBarVisible(true);
+          }
         }
 
         if (dayRes.ok) {
           const dayData = await dayRes.json();
-          if (Object.keys(dayData).length) renderDayBarChart(dayData);
+          if (Object.keys(dayData).length) {
+            renderDayBarChart(dayData);
+            setDayBarVisible(true);
+          }
         }
       } catch (err) {
         console.error("Failed to load charts:", err);
@@ -240,29 +285,16 @@ export default function SubRequestFinder() {
   // -----------------------------
   return (
     <section className="subpage">
-        <SubRequestNavbar />
+      <SubRequestNavbar />
 
-      <h1>Sub Request Finder</h1>
-      <p>
-        This dashboard visualizes substitute requests by class and time,
-        helping instructors identify high-demand periods at a glance.
-      </p>
-
-      {/* CENTERED GREY BOX */}
-      <div className="info-box">
-        <h2>Project Overview</h2>
-        <p>
-          This project parses real AoPS substitute request emails using a
-          FastAPI backend with Gmail IMAP, caches results for performance,
-          and visualizes trends using Chart.js.
-        </p>
-      </div>
+      <h1 className="topic">Substitute Request Data</h1>
 
       {/* PIE CHART */}
       <div
+        className={`chart-container ${pieVisible ? "visible" : ""}`}
         style={{
           height: isMobile ? "320px" : "360px",
-          maxWidth: "900px",
+          maxWidth: "1000px",
           width: "100%",
           margin: "0 auto 3rem",
           backgroundColor: "#111",
@@ -273,16 +305,22 @@ export default function SubRequestFinder() {
         <canvas ref={pieCanvasRef} />
       </div>
 
-      {/* CENTERED GREY BOX */}
+      {/* PIE INFO */}
       <div className="info-box">
-        <h2>Project Overview</h2>
+        <h2>Demand by Class</h2>
         <p>
-          This dashboard visualizes substitute requests in the mathematics department by math level, day, and time slot. This helping instructors identify high-demand periods at a glance. Data is automatically updated from email requests.
+          This chart displays the distribution of substitute requests across different math courses.
+          Each slice represents how frequently a specific class level requires substitute coverage 
+          based on recent email data. By visualizing the relative proportions, instructors and 
+          administrators can quickly identify which courses generate the highest substitution demand. 
+          This helps reveal workload patterns and may highlight areas where staffing adjustments 
+          or scheduling changes could improve coverage consistency.
         </p>
       </div>
 
-      {/* BAR CHART */}
+      {/* TIME SLOT BAR CHART */}
       <div
+        className={`chart-container ${barVisible ? "visible" : ""}`}
         style={{
           height: isMobile ? "420px" : "450px",
           maxWidth: "1000px",
@@ -296,16 +334,21 @@ export default function SubRequestFinder() {
         <canvas ref={barCanvasRef} />
       </div>
 
-      {/* CENTERED GREY BOX */}
+      {/* TIME SLOT INFO */}
       <div className="info-box">
-        <h2>Project Overview</h2>
+        <h2>Demand by Time Slot</h2>
         <p>
-          This dashboard visualizes substitute requests in the mathematics department by math level, day, and time slot. This helping instructors identify high-demand periods at a glance. Data is automatically updated from email requests.
+          This chart shows when substitute requests occur by grouping them into day and time slots. 
+          Each bar represents how often substitutes are requested during a specific teaching window.
+          This visualization makes it easy to identify peak demand periods at a glance. Recognizing 
+          these high-frequency time slots can help instructors plan availability, anticipate scheduling 
+          challenges, and optimize substitute coverage strategies.
         </p>
       </div>
 
       {/* DAY BAR CHART */}
       <div
+        className={`chart-container ${dayBarVisible ? "visible" : ""}`}
         style={{
           height: isMobile ? "420px" : "450px",
           maxWidth: "1000px",
@@ -319,6 +362,18 @@ export default function SubRequestFinder() {
         <canvas ref={dayBarCanvasRef} />
       </div>
 
+      {/* DAY INFO */}
+      <div className="info-box">
+        <h2>Demand by Day</h2>
+        <p>
+          This chart groups substitute requests by day of the week to highlight overall demand trends independent 
+          of specific time slots. By aggregating requests at the daily level, it becomes easier to identify 
+          which days consistently require more substitute coverage. This information supports staffing and 
+          hiring decisions by revealing when additional instructor availability is most needed. 
+          For example, recurring spikes on certain days may indicate the need to recruit substitutes with 
+          targeted availability rather than increasing overall staffing.
+        </p>
+      </div>
     </section>
   );
 }

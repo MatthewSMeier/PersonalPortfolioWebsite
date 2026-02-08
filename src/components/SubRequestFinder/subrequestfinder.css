@@ -16,7 +16,11 @@
     color: white;
     padding: 2rem;
     border-radius: 12px;
-    margin-bottom: 3rem;
+    margin-bottom: 7rem;
     text-align: left;
     box-sizing: border-box;
+}
+
+.topic {
+    margin-bottom: 3rem;
 }

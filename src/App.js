@@ -6,6 +6,7 @@ import Works from "./components/Works/works";
 import Contact from "./components/Contact/contact";
 import Footer from "./components/Footer/footer";
 import SubRequestFinder from "./components/SubRequestFinder/subrequestfinder";
+import ScrollToTop from "./components/Scroll/scrolltotop";
 
 function AppContent() {
   const location = useLocation();
@@ -41,6 +42,7 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AppContent />
     </BrowserRouter>
   );
