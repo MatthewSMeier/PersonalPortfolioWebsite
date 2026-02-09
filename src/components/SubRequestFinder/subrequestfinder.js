@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom"; // Removed since unused
 import Chart from "chart.js/auto";
 import "./subrequestfinder.css"; 
 import SubRequestNavbar from "./SubRequestNavbar";
@@ -81,17 +81,8 @@ export default function SubRequestFinder() {
           {
             data: Object.values(data),
             backgroundColor: [
-              "#00c8ff",
-              "#ff7a00",
-              "#2ecc71",
-              "#9b59b6",
-              "#e74c3c",
-              "#f1c40f",
-              "#1abc9c",
-              "#3498db",
-              "#e67e22",
-              "#95a5a6",
-              "#c0392b",
+              "#00c8ff", "#ff7a00", "#2ecc71", "#9b59b6", "#e74c3c",
+              "#f1c40f", "#1abc9c", "#3498db", "#e67e22", "#95a5a6", "#c0392b",
             ],
           },
         ],
@@ -244,9 +235,9 @@ export default function SubRequestFinder() {
     async function loadData() {
       try {
         const [pieRes, barRes, dayRes] = await Promise.all([
-          fetch("http://localhost:8000/api/class_breakdown"),
-          fetch("http://localhost:8000/api/sub_requests"),
-          fetch("http://localhost:8000/api/sub_requests_by_day"),
+          fetch("https://subrequestfinder.onrender.com/api/class_breakdown"),
+          fetch("https://subrequestfinder.onrender.com/api/sub_requests"),
+          fetch("https://subrequestfinder.onrender.com/api/sub_requests_by_day"),
         ]);
 
         if (pieRes.ok) {
@@ -278,7 +269,7 @@ export default function SubRequestFinder() {
     }
 
     loadData();
-  }, []);
+  }, []); // Option A: run once, ignore exhaustive-deps warning
 
   // -----------------------------
   // UI
