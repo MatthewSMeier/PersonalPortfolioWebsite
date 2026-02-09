@@ -269,7 +269,8 @@ export default function SubRequestFinder() {
     }
 
     loadData();
-  }, []); // Option A: run once, ignore exhaustive-deps warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Option B: suppress warning
 
   // -----------------------------
   // UI
