@@ -1,7 +1,7 @@
 #works {
     min-height: calc(100vh - 4rem);
     width: 95vw;
-    max-width: 60rem;
+    max-width: 65rem; /* slightly narrower than before */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,35 +23,39 @@
     max-width: 49rem;
     margin-bottom: 1.5rem;
 }
-
 .worksImgs {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-    width: 100vw;
-    max-width: 65rem;
+    gap: 1rem;
 }
 
+/* Each image forced into 4:3 landscape box */
 .worksImg {
     object-fit: cover;
-    height: 20rem;
-    margin: 0.5rem;
+    width: 28rem;       /* landscape width */
+    height: 21rem;      /* 4:3 ratio */
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Hover effect */
+.worksImg:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Buttons */
 .workBtn1 {
     border: none;
     border-radius: 2rem;
-    padding: 0.8rem;
-    padding-left: 55.5px;
-    padding-right: 55.5px;
+    padding: 0.8rem 3rem;
     background: white;
-    font-size: 1rem;
     font-weight: 600;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
     cursor: pointer;
-    display: block;
     font-size: 20px;
 }
 
@@ -60,9 +64,8 @@
     border-radius: 2rem;
     padding: 0.5rem 2.5rem;
     background: white;
-    font-size: 1rem;
     font-weight: 500;
-    margin-top: 0 0;
+    margin-top: 0;
     max-height: 4rem;
     cursor: pointer;
 }
@@ -74,12 +77,22 @@
     max-width: 100%;
     min-width: 5rem;
     padding: 0.1rem;
-    padding-left: 0rem;
     justify-content: center;
 }
 
-@media screen and (max-width: 585px) {
+/* Responsive for smaller screens */
+@media screen and (max-width: 720px) {
     .worksImg {
-        height: 48vw;
+        width: 45%;       /* 2 per row */
+        height: auto;
+        aspect-ratio: 4 / 3; /* keeps landscape */
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .worksImg {
+        width: 100%;      /* 1 per row on tiny screens */
+        height: auto;
+        aspect-ratio: 4 / 3;
     }
 }

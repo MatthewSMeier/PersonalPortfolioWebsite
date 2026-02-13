@@ -2,12 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './works.css';
 import GitHub from '../../assets/github2.png';
-import Portfolio1 from '../../assets/portfolio-1.png';
+import Portfolio1 from '../../assets/subRequest.png';
 import Portfolio2 from '../../assets/portfolio-2.png';
 import Portfolio3 from '../../assets/portfolio-3.png';
 import Portfolio4 from '../../assets/portfolio-4.png';
-import Portfolio5 from '../../assets/portfolio-5.png';
-import Portfolio6 from '../../assets/portfolio-6.png';
 
 const Works = () => {
   const navigate = useNavigate();
@@ -51,20 +49,6 @@ const Works = () => {
         />
         <img
           src={Portfolio4}
-          alt=""
-          className="worksImg"
-          onClick={() => handleClick('subrequestfinder')}
-          style={{ cursor: 'pointer' }}
-        />
-        <img
-          src={Portfolio5}
-          alt=""
-          className="worksImg"
-          onClick={() => handleClick('subrequestfinder')}
-          style={{ cursor: 'pointer' }}
-        />
-        <img
-          src={Portfolio6}
           alt=""
           className="worksImg"
           onClick={() => handleClick('subrequestfinder')}

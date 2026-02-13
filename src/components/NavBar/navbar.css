@@ -7,6 +7,7 @@
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 3;
@@ -18,30 +19,31 @@
     width: 4rem;
 }
 
-.desktopMenuListItem {
-    margin: 1rem;
-    cursor: pointer;
-    color: white;      
-    text-decoration: none; 
-}
-
+.desktopMenuListItem,
 .desktopMenuListItemSRF {
     margin: 1rem;
     cursor: pointer;
-    color: lightskyblue;      
     text-decoration: none; 
 }
 
-.desktopMenuListItemSRF:hover {
+.desktopMenuListItem {
+    color: white;
+}
+
+.desktopMenuListItemSRF {
+    color: lightskyblue;
+}
+
+.desktopMenuListItemSRF:hover,
+.desktopMenuListItem:hover {
     color: lightskyblue;
     padding-bottom: 0.5rem;
     border-bottom: 3px solid lightskyblue;
 }
 
-
-.desktopMenuBtn  {
+.desktopMenuBtn {
     background: white;
-    color:black;
+    color: black;
     border: none;
     display: flex;
     align-items: center;
@@ -49,22 +51,6 @@
     padding: 0 1rem;
     border-radius: 2rem;
     cursor: pointer;
-    margin-right: 5rem;
-}
-
-.desktopMenuListItem:hover {
-    color: lightskyblue;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid lightskyblue;
-}
-
-.desktopMenuImg {
-    object-fit: cover;
-    height: 1rem;
-    width: 1rem;
-    max-width: 100%;
-    padding: 1rem;
-    padding-left: 0rem;
 }
 
 .desktopMenuImg2 {
@@ -74,53 +60,123 @@
     max-width: 100%;
     min-width: 5rem;
     padding: 0.25rem;
-    padding-left: 0rem;
+}
+/* SubRequestFinder specific - hamburger always visible and aligned */
+.navbar.subrequestPage .hamburgerWrapper {
+    display: flex !important;       /* always visible */
+    position: relative;             /* align in navbar row */
+    top: 0;                         /* remove extra offset */
+    right: 0;                       /* stay in line with navbar content */
+    align-items: center;            /* vertically center with logo and LinkedIn */
+    height: 100%;                   /* match navbar height */
+}
+
+/* Make the hamburger image fill its container without pushing */
+.navbar.subrequestPage .mobMenu {
+    height: 1.8rem;
+    width: auto;
+    display: flex !important;
+    align-self: center;
+}
+
+/* Keep LinkedIn button from being pushed */
+.navbar.subrequestPage .desktopMenuBtn {
+    margin-left: auto; /* push it to far right */
+    display: flex;
 }
 
 .active {
     color: lightskyblue;
 }
-
-.mobMenu {
-    display: none;
-    object-fit: cover;
-    height: 1.8rem;
+/* Wrapper to anchor dropdown positioning */
+.menuWrapper {
+    position: relative; /* this is optional now */
 }
 
+/* Hamburger wrapper - removed from flex layout completely */
+.hamburgerWrapper {
+    position: absolute; /* absolutely positioned */
+    right: 2rem;        /* place from right */
+    top: 1.5rem;        /* vertical position */
+    display: none;      /* hide by default on desktop */
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 10;
+}
+
+.mobMenuB {
+    display: none;       /* hidden by default */
+}
+
+/* Only show hamburger on mobile */
+@media screen and (max-width: 720px) {
+    .hamburgerWrapper {
+        display: flex;
+    }
+}
+
+/* Hamburger icon */
+.mobMenu {
+    display: none; /* hidden on desktop */
+    object-fit: cover;
+    height: 1.8rem;
+    cursor: pointer;
+}
+
+/* Dropdown menu */
 .navMenu {
     position: absolute;
-    top: 4rem;
-    left: 20rem;
-    z-index: 2;
-    display:flex;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 5;
+    display: flex;
     flex-direction: column;
     padding: 0.5rem;
-    height: fit-content;
     min-width: 15rem;
     background: rgb(40,40,40);
     border-radius: 1rem;
+
+    /* Animation */
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
+/* Show state */
+.navMenu.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Individual menu items */
 .listItem {
     color: white;
     padding: 0.5rem 3rem;
-    margin: 0.25rem;
+    margin: 0.25rem 0;
     background: rgb(30,30,30);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
+.listItem:hover {
+    background: rgb(60,60,60);
+    transform: translateX(3px);
+}
 
-@media screen and (max-width : 720px) {
+/* Media query - show hamburger only on small screens */
+@media screen and (max-width: 720px) {
     .mobMenu {
         display: flex;
-        cursor: pointer;
     }
+
     .desktopMenu {
-        display: none;
+        display: none; /* hide desktop links */
     }
+
     .desktopMenuBtn {
-        display:none;
+        display: none; /* hide LinkedIn on mobile, only in menu */
     }
-
 }
-
-
