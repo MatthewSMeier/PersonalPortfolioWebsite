@@ -4,8 +4,8 @@ import './works.css';
 import GitHub from '../../assets/github2.png';
 import Portfolio1 from '../../assets/portfolioA.png';
 import Portfolio2 from '../../assets/portfolioB.png';
-import Portfolio3 from '../../assets/portfolio-3.png';
-import Portfolio4 from '../../assets/portfolio-4.png';
+/*import Portfolio3 from '../../assets/portfolio-3.png';
+import Portfolio4 from '../../assets/portfolio-4.png';*/
 
 const Works = () => {
   const navigate = useNavigate();
