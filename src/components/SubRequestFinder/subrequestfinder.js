@@ -212,7 +212,7 @@ export default function SubRequestFinder() {
           y: {
             beginAtZero: true,
             ticks: { color: "#ffffff", font: { size: isMobile ? 10 : 12 } },
-            grid: { color: "rgba(200,200,200,0.2)" },
+            grid: { color: "rgba(255,255,255,0.2)" },
           },
         },
       },
@@ -279,7 +279,7 @@ export default function SubRequestFinder() {
     <section className="subpage">
       <SubRequestNavbar />
 
-      <h1 className="topic">Substitute Request Data</h1>
+      <h1 className="topic">Substitute Request Analytics</h1>
 
       {/* PIE CHART */}
       <div

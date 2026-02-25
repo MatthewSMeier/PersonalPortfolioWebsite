@@ -1,7 +1,8 @@
+/* Container for the entire section */
 #works {
     min-height: calc(100vh - 4rem);
     width: 95vw;
-    max-width: 65rem; /* slightly narrower than before */
+    max-width: 75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,40 +12,81 @@
     padding: 0 1rem;
 }
 
+/* Background box for images */
+.backgroundBox {
+    display: flex;
+    flex-wrap: wrap;           /* wrap for responsiveness */
+    justify-content: center;
+    gap: 1.5rem;               /* spacing between images */
+    padding: 2rem 2rem;
+    border-radius: 1rem;
+    background: rgb(50, 50, 50);
+}
+
+/* Section title */
 .worksTitle {
-    margin: 1rem 0;
     margin-top: 5rem;
+    margin-bottom: 1rem;
     font-size: 3rem;
 }
 
+/* Section description */
 .worksDesc {
     font-weight: 300;
     font-size: 1rem;
     max-width: 49rem;
     margin-bottom: 1.5rem;
 }
-.worksImgs {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-}
 
-/* Each image forced into 4:3 landscape box */
+/* Individual images */
 .worksImg {
-    object-fit: cover;
-    width: 28rem;       /* landscape width */
-    height: 21rem;      /* 4:3 ratio */
+    width: 30rem;                /* default width */
+    height: auto;                /* maintain aspect ratio */
+    max-width: 100%;             /* never overflow container */
+    aspect-ratio: 3 / 2;         /* force 3:2 ratio */
+    object-fit: contain;         /* show entire image without cropping */
+    object-position: center;
     cursor: pointer;
     border-radius: 0.5rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+    background: black
+}
+
+.worksImgWhite {
+    width: 30rem;                /* default width */
+    height: auto;                /* maintain aspect ratio */
+    max-width: 100%;             /* never overflow container */
+    aspect-ratio: 3 / 2;         /* force 3:2 ratio */
+    object-fit: contain;         /* show entire image without cropping */
+    object-position: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+    background: white;
 }
 
 /* Hover effect */
 .worksImg:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
 }
+
+.worksImgWhite:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Flex container for images */
+.worksImgs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.2rem;
+}
+
 
 /* Buttons */
 .workBtn1 {
@@ -65,7 +107,7 @@
     padding: 0.5rem 2.5rem;
     background: white;
     font-weight: 500;
-    margin-top: 0;
+    margin-top: 5rem;
     max-height: 4rem;
     cursor: pointer;
 }
@@ -80,19 +122,20 @@
     justify-content: center;
 }
 
-/* Responsive for smaller screens */
+/* Responsive for tablets */
 @media screen and (max-width: 720px) {
     .worksImg {
-        width: 45%;       /* 2 per row */
+        width: 48%;           /* 2 per row */
         height: auto;
-        aspect-ratio: 4 / 3; /* keeps landscape */
+        aspect-ratio: 3 / 2;  /* maintain 3:2 ratio */
     }
 }
 
+/* Responsive for small mobile screens */
 @media screen and (max-width: 450px) {
     .worksImg {
-        width: 100%;      /* 1 per row on tiny screens */
+        width: 100%;          /* 1 per row */
         height: auto;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 2;
     }
 }
