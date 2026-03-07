@@ -8,12 +8,10 @@ import bootstrapLogo from "../../assets/bootstrap.svg";
 import tailwindLogo from "../../assets/tailwind.svg";
 import sassLogo from "../../assets/sass.svg";
 import reactLogo from "../../assets/react.svg";
-import npmLogo from "../../assets/npm.svg";
-import yarnLogo from "../../assets/yarn.svg";
-import nodeLogo from "../../assets/nodejs.svg";
+import svelteLogo from "../../assets/svelte.svg";
+import nextLogo from "../../assets/nextjs.svg";
 import djangoLogo from "../../assets/django.svg";
 import springLogo from "../../assets/springboot.svg";
-import mysqlLogo from "../../assets/mysql.svg";
 import expressLogo from "../../assets/express.svg";
 import javaLogo from "../../assets/java.svg";
 import pythonLogo from "../../assets/python.svg";
@@ -43,8 +41,8 @@ const Skills = () => {
       <SkillCard logo={tailwindLogo} name="Tailwind" color="#0891B2" />
       <SkillCard logo={sassLogo} name="SASS" color="#CC6699" />
       <SkillCard logo={reactLogo} name="React" color="#21A1F1" />
-      <SkillCard logo={npmLogo} name="NPM" color="#CB3837" />
-      <SkillCard logo={yarnLogo} name="Yarn" color="#2C8EBB" />
+      <SkillCard logo={nextLogo} name="Next.js" color="#FFFFFF" />
+      <SkillCard logo={svelteLogo} name="Svelte" color="#FF3E00" />
         </div>
         </div>
         </div>
@@ -54,8 +52,8 @@ const Skills = () => {
           <h2 className="skillBarTextTitle">Backend Development</h2>
           <p className="skillBarTextDesc">I develop scalable APIs and databases with modern backend frameworks. Furthermore, I design scalable server-side applications with database-driven architectures.</p>
         <div className="skillsGrid">
-        <SkillCard logo={nodeLogo} name="Node.js" color="#43853D" />
-        <SkillCard logo={mysqlLogo} name="MySQL" color="#2C7BB6" />
+        <SkillCard logo={fastapiLogo} name="FastAPI" color="#00C7B7" />
+        <SkillCard logo={flaskLogo} name="Flask" color="#E8E8E8" />
         <SkillCard logo={djangoLogo} name="Django" color="#0F4D34" />
         <SkillCard logo={expressLogo} name="Express" color="#5A5A5A" />
         <SkillCard logo={springLogo} name="Spring Boot" color="#6DB33F" />
