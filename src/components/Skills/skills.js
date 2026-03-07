@@ -13,6 +13,8 @@ import nextLogo from "../../assets/nextjs.svg";
 import djangoLogo from "../../assets/django.svg";
 import springLogo from "../../assets/springboot.svg";
 import expressLogo from "../../assets/express.svg";
+import flaskLogo from "../../assets/flask.svg";
+import fastapiLogo from "../../assets/fastapi.svg";
 import javaLogo from "../../assets/java.svg";
 import pythonLogo from "../../assets/python.svg";
 import rLogo from "../../assets/r.svg";
