@@ -43,7 +43,7 @@ const Skills = () => {
       <SkillCard logo={tailwindLogo} name="Tailwind" color="#0891B2" />
       <SkillCard logo={sassLogo} name="SASS" color="#CC6699" />
       <SkillCard logo={reactLogo} name="React" color="#21A1F1" />
-      <SkillCard logo={nextLogo} name="Next.js" color="#FFFFFF" />
+      <SkillCard logo={nextLogo} name="Next.js" color="#B0B0B0" />
       <SkillCard logo={svelteLogo} name="Svelte" color="#FF3E00" />
         </div>
         </div>
@@ -55,7 +55,7 @@ const Skills = () => {
           <p className="skillBarTextDesc">I develop scalable APIs and databases with modern backend frameworks. Furthermore, I design scalable server-side applications with database-driven architectures.</p>
         <div className="skillsGrid">
         <SkillCard logo={fastapiLogo} name="FastAPI" color="#00C7B7" />
-        <SkillCard logo={flaskLogo} name="Flask" color="#E8E8E8" />
+        <SkillCard logo={flaskLogo} name="Flask" color="#B0B0B0" />
         <SkillCard logo={djangoLogo} name="Django" color="#0F4D34" />
         <SkillCard logo={expressLogo} name="Express" color="#5A5A5A" />
         <SkillCard logo={springLogo} name="Spring Boot" color="#6DB33F" />
