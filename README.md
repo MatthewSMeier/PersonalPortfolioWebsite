@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+#Matt’s Pizzeria — Full-Stack Food Ordering Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Description: The platform allows users to browse a dynamic menu, manage a shopping cart, authenticate via Google OAuth or credentials, and complete a simulated checkout flow with delivery or carryout options.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+#Live Demo: https://mattspizzeria.vercel.app
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+User Experience:
+-	Fully responsive UI optimized for mobile, tablet, and desktop.
+-	Dynamic homepage with featured menu items and promotions
+-	Smooth navigation with persistent layout and session awareness
 
-### `npm test`
+Menu System:
+-	Dynamic menu rendering from MongoDB database
+-	Categorized items (Pizza, Sides, Drinks, etc.)
+-	Reusable menu item components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Shopping Cart:
+-	Global cart state managed with React Context API
+-	Add / remove items with instant UI updates
+-	Animated “fly-to-cart” interaction for enhanced UX
+-	Real-time cart badge with item count indicator
 
-### `npm run build`
+Checkout Flow:
+-	Interactive checkout modal system
+-	Choose between **Delivery** or **Carryout**
+-	Dynamic pricing with delivery fee calculation
+-	Profile-based address auto-fill for delivery orders
+-	Order confirmation with success state and cart reset
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Authentication & User System:
+-	Secure authentication using NextAuth.js
+-	Google OAuth integration
+-	Credential-based login support
+-	Persistent user sessions
+-	Editable user profile (name, email, address)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Profile System
+-	User profile dashboard
+-	Stored address used for delivery checkout
+-	Account updates persisted via API routes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+#Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Frontend:
+-	Next.js (App Router)
+-	React
+-	TailwindCSS
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Backend:
+-	Next.js (API Routes)
+-	MongoDB (Atlas)
+-	Mongoose (ODM)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Authentication:
+-	NextAuth.js (Google OAuth + Credentials)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+State Management
+-	React Context API (Cart & Order state)
 
-## Learn More
+Deployment
+-	Vercel
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#Architecture Overview
 
-### Code Splitting
+- **Frontend:** Next.js App Router with component-based UI
+- **Backend:** API routes for user profile and data handling
+- **Database:** MongoDB Atlas for user and menu storage
+- **Auth:** NextAuth session-based authentication
+- **State:** Global cart and order state via Context API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🔐 Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The application requires the following environment variables:
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+NEXTAUTH_URL=
+NEXTAUTH_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+MONGODB_URI=

@@ -301,7 +301,7 @@ export default function SubRequestFinder() {
       <div className="info-box">
         <h2>Demand by Class</h2>
         <p>
-          This chart displays the distribution of substitute requests across different math courses.
+          This chart displays the live distribution of substitute requests across different math courses.
           Each slice represents how frequently a specific class level requires substitute coverage 
           based on recent email data. By visualizing the relative proportions, instructors and 
           administrators can quickly identify which courses generate the highest substitution demand. 

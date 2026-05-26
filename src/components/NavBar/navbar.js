@@ -61,7 +61,7 @@ const Navbar = () => {
               to="skills"
               spy
               smooth
-              offset={-150}
+              offset={-100}
               duration={500}
               className="desktopMenuListItem"
             >
@@ -72,7 +72,7 @@ const Navbar = () => {
               to="works"
               spy
               smooth
-              offset={-250}
+              offset={-30}
               duration={500}
               className="desktopMenuListItem"
             >
@@ -83,7 +83,7 @@ const Navbar = () => {
               to="contact"
               spy
               smooth
-              offset={-200}
+              offset={-10}
               duration={500}
               className="desktopMenuListItem"
             >

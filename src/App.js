@@ -19,16 +19,15 @@ function AppContent() {
       {!hideNavbar && <Navbar />}
 
       <Routes>
-        <Route
-          path="/"
-          element={
+        <Route path="/"
+        element={
             <>
               <Intro />
               <Skills />
               <Works />
               <Contact />
             </>
-          }
+        }
         />
 
         <Route path="/subrequestfinder" element={<SubRequestFinder />} />
